@@ -6,8 +6,8 @@
     "start": "npx tsc -w",
     "dev": "npx nodemon",
     "build": "rimraf dist && tsc",
-  "ts.check": "tsc --project tsconfig.json",
-  "add-build": "git add dist"
+    "ts.check": "tsc --project tsconfig.json",
+    "add-build": "git add dist"
   
   },
   "pre-commit": [
