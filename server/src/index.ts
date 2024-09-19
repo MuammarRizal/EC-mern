@@ -1,11 +1,24 @@
+import "./utils/ConnectDB";
+
 import express from "express";
-import authRouter from "./routes/authRouter";
+import Logger from "./utils/Logger";
+import { routes } from "./routes/index.routes";
+import { ErrorHandler, notFound } from "./middlewares/ErrorMiddleware";
 
 const app = express();
-const PORT = process.env.PORT || 4000;
+const PORT: string | number = process.env.PORT || 4000;
 
-app.use("/api/v1/auth", authRouter);
+// Middlewares
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Routes for to access
+routes(app);
+
+// Error middlewares
+app.use(notFound);
+app.use(ErrorHandler);
 
 app.listen(PORT, () => {
-  console.log("Server berjalan di ", { PORT });
+  Logger.info(`Server is running at port ${PORT}`);
 });
